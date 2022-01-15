@@ -28,8 +28,10 @@ app.get('/test', (req, res) => {
 })
 
 app.post('/send', (req, res) => {
-    var body = req.files.file
-    console.log("🚀 ~ file: index.js ~ line 32 ~ app.post ~ body", body)
+    var text = req.body
+    console.log("🚀 ~ file: index.js ~ line 32 ~ app.post ~ text", text)
+    var image = req.files.file
+    console.log("🚀 ~ file: index.js ~ line 34 ~ app.post ~ image", image)
     res.end('yes')
 })
 

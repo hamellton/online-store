@@ -4,6 +4,7 @@ import Layout from '../src/components/Layout'
 
 const AboutPage = () => {
     const [file, setFile] = useState(null)
+    const [succesBlock, setSuccesBlock] = useState<boolean>(false)
 
     useEffect(() => {
         const fetchFunction = async () => {
@@ -21,13 +22,14 @@ const AboutPage = () => {
         if(file) {
             const formData = new FormData()
             formData.append('file', file);
+            formData.append('text', 'text');
             return fetch(`http://localhost:5000/send`, {
                 method: 'POST',
                 body: formData,
             })
                 .then((res) => {
                     if (res.status >= 200 && res.status < 300) {
-                        console.log('Good POST request')
+                      setSuccesBlock(true)
                     }
                 })
         }
@@ -45,6 +47,7 @@ const AboutPage = () => {
       </p>
         <input type="file" onChange={handleUploadFile} />
         <button onClick={submit}>send file</button>
+        {succesBlock && <div>Success Post request, Image send!</div>}
     </Layout>
   )
 }
